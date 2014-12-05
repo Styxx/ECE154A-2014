@@ -183,48 +183,48 @@ Multiplication:
 	# $a0 - Multiplicand
 	# $a1 - Multiplier
 	# $v0 - Result
-	# $t0 - The mask for the right bit
-	# $t1 - The LSB of the multiplier
+	# $t0 - The mask for the right bit  $t5
+	# $t1 - The LSB of the multiplier	$s6
 
 	li $v0, 0	# Initialize the result register
 	#li $v1, 0
-	li $t0, 1	# Initialize the mask 
-	li $t1, 0	# Initialize the LSB result
-	#li $t2, 0
-	#li $t3, 0
-	#li $t4, 0
+	li $t5, 1	# Initialize the mask 
+	li $s6, 0	# Initialize the LSB result
+	#li $t2, 0	$t9
+	#li $t3, 0	$s8
+	#li $t4, 0	$s9
 
 	Multiplication_loop:
 		beq $a1, $zero, Multiplication_end	# If the multiplier is zero we finished
-		and $t1, $t0, $a1			# Get the LSB
-		beq $t1, 1, Multiplication_do_add	# If the LSB is not zero add the multiplicand to the result
-		beq $t1, 0, Multiplication_do_shift	# If the LSB is zero add just do the shifts
+		and $s6, $t5, $a1			# Get the LSB
+		beq $s6, 1, Multiplication_do_add	# If the LSB is not zero add the multiplicand to the result
+		beq $s6, 0, Multiplication_do_shift	# If the LSB is zero add just do the shifts
 
 		Multiplication_do_add: 
 			addu $v0, $v0, $a0	
 			#mod starts here
-			addu $t2, $0, $a0 
-			addu $t4, $0, $a2 #move P to $t4
-			addu $t3, $0, 1 #initialize mask to 1  
-			blt $t4, $t2, modShift
+			addu $t9, $0, $a0 
+			addu $t9, $0, $a2 #move P to $s9
+			addu $t8, $0, 1 #initialize mask to 1  
+			blt $t9, $t9, modShift
 			j findMod
 			
 		modShift:
-			sll $t4, $t4, 1 #shift left p
-			sll $t3, $t3, 1 #shift left mask
-			blt $t4, $t2, modShift
+			sll $s9, $s9, 1 #shift left p
+			sll $s8, $s8, 1 #shift left mask
+			blt $s9, $t9, modShift
 			
 		findMod:
-			bge $t2, $t4, mod2
+			bge $t9, $s9, mod2
 			j mod3
 		mod2:
-			subu $t2, $t2, $t4
+			subu $t9, $t9, $s9
 			
 		mod3:
-			srl $t4, $t4, 1 
-			srl $t3, $t3, 1 
-			bne $t3, 0, findMod
-			addu $v1 $v1, $t2
+			srl $s9, $s9, 1 
+			srl $s8, $s8, 1 
+			bne $s8, 0, findMod
+			addu $v1 $v1, $t9
 
 		Multiplication_do_shift:
 			sll $a0, $a0, 1			# Shift left the multiplicand
@@ -237,26 +237,26 @@ Multiplication:
 		j finalMod
 
 	finalMod:
-		addu $t2, $0, $v1
-		addu $t4, $0, $a2 #move P to $t4
-		addu $t3, $0, 1 #initialize mask to 1  
-		blt $t4, $t2, modShift2
+		addu $t9, $0, $v1
+		addu $s9, $0, $a2 #move P to $s9
+		addu $s8, $0, 1 #initialize mask to 1  
+		blt $s9, $t9, modShift2
 
 	modShift2:
-			sll $t4, $t4, 1 #shift left p
-			sll $t3, $t3, 1 #shift left mask
-			blt $t4, $t2, modShift2
+			sll $s9, $s9, 1 #shift left p
+			sll $s8, $s8, 1 #shift left mask
+			blt $s9, $t9, modShift2
 			
 		findMod2:
-			bge $t2, $t4, mod4
+			bge $t9, $s9, mod4
 			j mod5
 		mod4:
-			subu $t2, $t2, $t4
+			subu $t9, $t9, $s9
 			
 		mod5:
-			srl $t4, $t4, 1 
-			srl $t3, $t3, 1 
-			bne $t3, 0, findMod2
-			addu $v1 $0, $t2
+			srl $s9, $s9, 1 
+			srl $s8, $s8, 1 
+			bne $s8, 0, findMod2
+			addu $v1 $0, $t9
 	
 	jr $ra
