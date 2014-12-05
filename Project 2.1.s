@@ -28,83 +28,83 @@ start:      #For each test case
             #Put result in $t3
                 
             addi $s4, $0, 16                    # set bit counter to MSB
-            addi $t0, $0, 32767                 # binary 1000 0000 0000 0000
-            slt  $t9, $t0, $t1                  # is 32767 < exponent?
+            addi $t8, $0, 32767                 # binary 1000 0000 0000 0000
+            slt  $t9, $t8, $t1                  # is 32767 < exponent?
             bne  $t9, $zero, found1             # if so, move on
             
             addi $s4, $s4, -1                   # decrement bit counter
-            addi $t0, $0, 16384                 # binary 0100 0000 0000 0000
-            slt  $t9, $t0, $t1                  # is 16384 < exponent?
+            addi $t8, $0, 16383                 # binary 0100 0000 0000 0000
+            slt  $t9, $t8, $t1                  # is 16383 < exponent?
             bne  $t9, $zero, found1             # if so, move on
             
             addi $s4, $s4, -1                   # decrement bit counter
-            addi $t0, $0, 8192                  # binary 0010 0000 0000 0000
-            slt  $t9, $t0, $t1                  # is 8192 < exponent?
+            addi $t8, $0, 8191                  # binary 0010 0000 0000 0000
+            slt  $t9, $t8, $t1                  # is 8191 < exponent?
             bne  $t9, $zero, found1             # if so, move on
 
             addi $s4, $s4, -1                   # decrement bit counter
-            addi $t0, $0, 4096                  # binary 0001 0000 0000 0000
-            slt  $t9, $t0, $t1                  # is 4096 < exponent?
+            addi $t8, $0, 4095                  # binary 0001 0000 0000 0000
+            slt  $t9, $t8, $t1                  # is 4095 < exponent?
             bne  $t9, $zero, found1             # if so, move on
             
             addi $s4, $s4, -1                   # decrement bit counter
-            addi $t0, $0, 2048                  # binary 0000 1000 0000 0000
-            slt  $t9, $t0, $t1                  # is 2048 < exponent?
+            addi $t8, $0, 2047                  # binary 0000 1000 0000 0000
+            slt  $t9, $t8, $t1                  # is 2047 < exponent?
             bne  $t9, $zero, found1             # if so, move on
             
             addi $s4, $s4, -1                   # decrement bit counter
-            addi $t0, $0, 1024                  # binary 0000 0100 0000 0000
-            slt  $t9, $t0, $t1                  # is 1024 < exponent?
+            addi $t8, $0, 1023                  # binary 0000 0100 0000 0000
+            slt  $t9, $t8, $t1                  # is 1023 < exponent?
             bne  $t9, $zero, found1             # if so, move on
             
             addi $s4, $s4, -1                   # decrement bit counter
-            addi $t0, $0, 512                   # binary 0000 0010 0000 0000
-            slt  $t9, $t0, $t1                  # is 512 < exponent?
+            addi $t8, $0, 511                   # binary 0000 0010 0000 0000
+            slt  $t9, $t8, $t1                  # is 511 < exponent?
             bne  $t9, $zero, found1             # if so, move on
             
             addi $s4, $s4, -1                   # decrement bit counter
-            addi $t0, $0, 216                   # binary 0000 0001 0000 0000
-            slt  $t9, $t0, $t1                  # is 216 < exponent?
+            addi $t8, $0, 255                   # binary 0000 0001 0000 0000
+            slt  $t9, $t8, $t1                  # is 255< exponent?
             bne  $t9, $zero, found1             # if so, move on
             
             addi $s4, $s4, -1                   # decrement bit counter
-            addi $t0, $0, 128                   # binary 0000 0000 1000 0000
-            slt  $t9, $t0, $t1                  # is 128 < exponent?
+            addi $t8, $0, 127                   # binary 0000 0000 1000 0000
+            slt  $t9, $t8, $t1                  # is 127 < exponent?
             bne  $t9, $zero, found1             # if so, move on
             
             addi $s4, $s4, -1                   # decrement bit counter
-            addi $t0, $0, 64                    # binary 0000 0000 0100 0000
-            slt  $t9, $t0, $t1                  # is 64 < exponent?
+            addi $t8, $0, 63                    # binary 0000 0000 0100 0000
+            slt  $t9, $t8, $t1                  # is 63 < exponent?
             bne  $t9, $zero, found1             # if so, move on
             
             addi $s4, $s4, -1                   # decrement bit counter
-            addi $t0, $0, 32                    # binary 0000 0000 0010 0000
-            slt  $t9, $t0, $t1                  # is 32 < exponent?
+            addi $t8, $0, 31                    # binary 0000 0000 0010 0000
+            slt  $t9, $t8, $t1                  # is 31 < exponent?
             bne  $t9, $zero, found1             # if so, move on
             
             addi $s4, $s4, -1                   # decrement bit counter
-            addi $t0, $0, 16                    # binary 0000 0000 0001 0000
-            slt  $t9, $t0, $t1                  # is 16 < exponent?
+            addi $t8, $0, 15                    # binary 0000 0000 0001 0000
+            slt  $t9, $t8, $t1                  # is 15 < exponent?
             bne  $t9, $zero, found1             # if so, move on
             
             addi $s4, $s4, -1                   # decrement bit counter
-            addi $t0, $0, 8                     # binary 0000 0000 0000 1000
-            slt  $t9, $t0, $t1                  # is 8 < exponent?
+            addi $t8, $0, 7                     # binary 0000 0000 0000 1000
+            slt  $t9, $t8, $t1                  # is 7 < exponent?
             bne  $t9, $zero, found1             # if so, move on
             
             addi $s4, $s4, -1                   # decrement bit counter
-            addi $t0, $0, 4                     # binary 0000 0000 0000 0100
-            slt  $t9, $t0, $t1                  # is 4 < exponent?
+            addi $t8, $0, 3                     # binary 0000 0000 0000 0100
+            slt  $t9, $t8, $t1                  # is 3 < exponent?
             bne  $t9, $zero, found1             # if so, move on
             
             addi $s4, $s4, -1                   # decrement bit counter
-            addi $t0, $0, 2                     # binary 0000 0000 0000 0010
-            slt  $t9, $t0, $t1                  # is 2 < exponent?
+            addi $t8, $0, 1                     # binary 0000 0000 0000 0010
+            slt  $t9, $t8, $t1                  # is 1 < exponent?
             bne  $t9, $zero, found1             # if so, move on
             
             addi $s4, $s4, -1                   # decrement bit counter
-            addi $t0, $0, 1                     # binary 0000 0000 0000 0001
-            slt  $t9, $t0, $t1                  # is 1 < exponent?
+            addi $t8, $0, 0                     # binary 0000 0000 0000 0001
+            slt  $t9, $t8, $t1                  # is 0 < exponent?
             bne  $t9, $zero, expone             # if so, move on
             
 expzero:    # If not, the exponent is 0
@@ -173,7 +173,9 @@ RET:	    # return y ($t6 for now)
             #return y
             
             
-
+#System end
+		li $v0, 10
+		syscall
 
 
 ummu: 
