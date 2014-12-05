@@ -4,9 +4,9 @@
 
 	    .data
 N:	    .word 10						# number of test cases supplied; at least 10
-A:	    .word 5,25,9,12345,54321,... 			# parameter A in (A^B) mod P; add 5 or more test cases
-B:	    .word 0,16,8,54321,10000,... 			# parameter B in (A^B) mod P; add 5 or more test cases
-P:	    .word 8,13,2,10000,65535,... 			# parameter P in (A^B) mod P; add 5 or more test cases
+A:	    .word 25,9,12345,54321,... 			# parameter A in (A^B) mod P; add 5 or more test cases
+B:	    .word 16,8,54321,10000,... 			# parameter B in (A^B) mod P; add 5 or more test cases
+P:	    .word 13,2,10000,65535,... 			# parameter P in (A^B) mod P; add 5 or more test cases
 C:	    .word 1,1,1,1,1,... 				# results of test cases 
 	    .globl main
 	    .text
@@ -128,49 +128,49 @@ found1:     # Most significant 1 found
             bne     $t8, $0, LSB1                       # if $t8 == 1, goto LSB1
             j       LSB0
 
-LSB1:       add     $t3, $0, $t0                        # result = A (base)
+LSB1:       add     $t6, $0, $t0                        # result = A (base)
 	    j LOOP					# jumps to LOOP
-LSB0:       addi    $t3, $0, 1                          # result = 1
+LSB0:       addi    $t6, $0, 1                          # result = 1
 
-LOOP:	    addi $t4, $t5, 0				# initializes counter 
-	    jal ummu					# jump and link to amumu (registers for X and P)
-	    srl $t1, $t1, 1				# implements shift to right
-	    and $t6, $t1, 1				# checks if bit is a 1
-	    bne $t7, $zero, BIS1			# checks value of $t6
-	    addi $t4, $t4, -1				# decrement counter
-	    slt $s7, $0, $t4				# check if for loop ends; if 0 < $t4, $s7 = 1
-	    bne $s7, $0, LOOP				# if 0 < $t4, then restart loop
-	    j RET					# if 0 = $t4, then end loop
+LOOP:	    addi $t4, $s4, 0				# initializes counter 
+			jal ummu					# jump and link to amumu (registers for X and P)
+			srl $t1, $t1, 1				# implements shift to right
+			and $t3, $t1, 1				# checks if bit is a 1
+			bne $t3, $zero, BIS1			# checks value of $t3
+			addi $t4, $t4, -1				# decrement counter
+			slt $s7, $0, $t4				# check if for loop ends; if 0 < $t4, $s7 = 1
+			bne $s7, $0, LOOP				# if 0 < $t4, then restart loop
+			j RET					# if 0 = $t4, then end loop
 	    
-BIS1:	    and $t6, $s8, 1				# check if y is odd
-	    beq $t6, $0, YIS0				# if y is 0
-	    bne $t6, $0, YIS1				# if y is 1
+BIS1:		and $s8, $t6, 1					# check if y is odd
+			beq $s8, $0, YIS0				# if y is 0
+			bne $s8, $0, YIS1				# if y is 1
 	    
 YIS1:	    add $t6, $t0, $0				# if y is 1, set y = x
-	    j LOOP
+			j LOOP
 
 YIS0:	    jal ummu					# if y is 0, y = y * x (mod m)
-	    j LOOP
+			j LOOP
 	    
 RET:	    # return y ($t6 for now)
-	    sw $t6, 0($s5)
-	    add $v1, $t6, $zero
-	    
-	    #increment test case counter ($s4)
-	    addi $s4, $s4, 4;
-	    
-	    ##### Need to figure out how to go betwen test cases
-	    ##### As well as figuring out when to stop after all test cases have been completed
-	    ##### (N == $s4)
-	    
-	    
-            # for (i = 0; i < 15; i++)
-                # x = x * x % m
-                # if (B[i] == 1)
-                    # if (y == 1) { y = x; }
-                    # else {y * x % m}
-            #endfor
-            #return y
+			sw $t6, 0($s5)
+			add $v1, $t6, $zero
+			
+			#increment test case counter ($s4)
+			addi $s4, $s4, 4;
+			
+			##### Need to figure out how to go betwen test cases
+			##### As well as figuring out when to stop after all test cases have been completed
+			##### (N == $s4)
+			
+			
+				# for (i = 0; i < 15; i++)
+					# x = x * x % m
+					# if (B[i] == 1)
+						# if (y == 1) { y = x; }
+						# else {y * x % m}
+				#endfor
+				#return y
             
             
 #System end
