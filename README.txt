@@ -8,7 +8,7 @@ Project 2.1.s is the most recent update of part d
   It does not go through all test cases. It currently only samples one test case before "ending."
 
 Other ummu.s is the part c code that has been adapted by Mason Levy from internet slides.
-  It is fully functional and works. However, it may not be according to the specs given in the project description, since it was not adapted from shamu (Ex. 11.4 in the Textbook).
+  It is fully functional and works. However, it may not be according to the specs given in the project description, since it was not adapted from shamu (Ex. 11.4 in the Textbook). It also is not in MicroMIPS.
 
 ummu.s is the part c code that has said to work by some, but not by others.
   It is adapted from shamu; however its functionality is questionable.
